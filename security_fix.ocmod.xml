@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>Security Fix</name>
+  <code>security-fix</code>
+  <version>1.0</version>
+  <author>Open Cat</author>
+  <link>https://github.com/open-cat</link>
+ 
+  <file path="system/library/db/mpdo.php">
+    <operation>
+      <search><![CDATA[throw new \Exception('Failed to connect to database. Reason: \'' . $e->getMessage() . '\'');]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . $e->getMessage() . ' Error Code : ' . $e->getCode());]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . $e->getMessage() . ' Error Code : ' . $e->getCode() . ' <br />' . $sql);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+  </file>
+  
+  <file path="system/library/db/mssql.php">
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: Could not connect to database ' . $database);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: Could not make a database connection using ' . $username . '@' . $hostname);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . mssql_get_last_message($this->connection) . '<br />' . $sql);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+  </file>
+  
+  <file path="system/library/db/mysql.php">
+    <operation>
+      <search><![CDATA[trigger_error('Error: Could not make a database link using ' . $username . '@' . $hostname);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: Could not connect to database ' . $database);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . mysql_error($this->connection) . '<br />Error No: ' . mysql_errno($this->connection) . '<br /> Error in: <b>' . $trace[1]['file'] . '</b> line <b>' . $trace[1]['line'] . '</b><br />' . $sql);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+  </file>
+  
+  <file path="system/library/db/mysqli.php">
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . $this->connection->error . '<br />Error No: ' . $this->connection->errno);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . $this->connection->error  . '<br />Error No: ' . $this->connection->errno . '<br />' . $sql);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+  </file>
+  
+  <file path="system/library/db/postgre.php">
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: Could not make a database link using ' . $username . '@' . $hostname);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: Could not connect to database ' . $database);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+    <operation>
+      <search><![CDATA[throw new \Exception('Error: ' . pg_result_error($this->link) . '<br />' . $sql);]]></search>
+      <add position=""><![CDATA[die('Unable to connect to database');]]></add>
+    </operation>
+  </file>
+  
+</modification>
